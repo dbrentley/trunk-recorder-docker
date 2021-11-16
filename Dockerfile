@@ -43,5 +43,5 @@ CMD ["/bin/bash"]
 
 # build it: docker build -t trunk-recorder .
 # run it:   docker run -it trunk-recorder
-# login:    skanmikey/scanmikey
+# login:    scanmikey/scanmikey
 # profit:   trunk-recorder
