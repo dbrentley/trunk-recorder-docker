@@ -26,9 +26,12 @@ RUN git clone https://github.com/robotastic/trunk-recorder.git && \
 
 FROM debian
 
-RUN apt update && apt upgrade -y
-COPY --from=builder /root/trunk-recorder/trunk-recorder /usr/local/bin/
+RUN apt update && apt upgrade -y && apt install -y vim sudo
+
+COPY --from=builder /root/trunk-recorder/build/trunk-recorder /usr/local/bin/
 COPY --from=builder /usr/local/lib/ /usr/local/lib/
+COPY --from=builder /usr/lib/x86_64-linux-gnu/ /usr/lib/x86_64-linux-gnu/
+RUN ldconfig /usr/local/lib/trunk-recorder
 
 RUN useradd -s /bin/bash -m scanmikey && yes scanmikey | passwd scanmikey && \
     echo "scanmikey ALL = (ALL) ALL" >> /etc/sudoers
